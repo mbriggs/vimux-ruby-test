@@ -98,7 +98,7 @@ class RubyTest
     if spec_file?
       run_spec
     else
-      run_unit_test(rails, ruby_command)
+      run_unit_test(rails)
     end
   end
 
@@ -120,7 +120,7 @@ class RubyTest
         send_to_vimux("#{spec_command} #{current_file}:#{context_line_number}")
       else
         method_name = Regexp.escape(method_name)
-        send_to_vimux("#{ruby_command} #{current_file} -n /'#{method_name}'/")
+        send_to_vimux("#{ruby_command} #{current_file} -n \"/#{method_name}/\"")
       end
     end
   end
@@ -138,7 +138,7 @@ class RubyTest
       if current_file =~ /\/acceptance\//
         'zeus acceptance'
       else
-        'zeus integration'
+        'zeus test'
       end
     else
       'ruby'
@@ -155,7 +155,7 @@ class RubyTest
   end
 
   def send_to_vimux(test_command)
-    Vim.command("call RunVimTmuxCommand(\"clear && #{test_command}\")")
+    Vim.command("call RunVimTmuxCommand('clear && #{test_command}')")
   end
 end
 EOF
