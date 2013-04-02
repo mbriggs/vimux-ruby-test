@@ -133,6 +133,19 @@ class RubyTest
     end
   end
 
+  def ruby_command
+    if File.exists?('./.zeus.sock')
+      if current_file =~ /\/acceptance\//
+        'zeus acceptance'
+      else
+        'zeus integration'
+      end
+    else
+      'ruby'
+    end
+  end
+
+
   def spec_command
     if File.exists?('./.zeus.sock')
       'zeus rspec'
