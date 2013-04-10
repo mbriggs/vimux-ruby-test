@@ -127,7 +127,7 @@ class RubyTest
 
   def run_all(rails=false)
     if spec_file?
-      send_to_vimux("#{spec_command} '#{current_file}'")
+      send_to_vimux("#{spec_command} \"#{current_file}\"")
     else
       send_to_vimux("#{ruby_command} #{"-I #{rails_test_dir} " if rails}#{current_file}")
     end
